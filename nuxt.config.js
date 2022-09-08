@@ -139,7 +139,7 @@ export default {
         fonts: [
           // Font
           {
-            fileExtensions: ["otf"],
+            fileExtensions: ["ttf"],
             fontFamily: "metropolis Regular",
             fontFaces: [
               // Font-Face
@@ -151,7 +151,7 @@ export default {
             ],
           },
           {
-            fileExtensions: ["otf"],
+            fileExtensions: ["ttf"],
             fontFamily: "metropolis SemiBold",
             fontFaces: [
               // Font-Face
@@ -163,7 +163,7 @@ export default {
             ],
           },
           {
-            fileExtensions: ["otf"],
+            fileExtensions: ["ttf"],
             fontFamily: "metropolis Bold",
             fontFaces: [
               // Font-Face
@@ -175,7 +175,7 @@ export default {
             ],
           },
           {
-            fileExtensions: ["otf"],
+            fileExtensions: ["ttf"],
             fontFamily: "metropolis Light",
             fontFaces: [
               // Font-Face
@@ -289,7 +289,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl:"https://olympia-api.phoinix.ai/"
+    baseUrl: "https://olympia-api.phoinix.ai/",
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
