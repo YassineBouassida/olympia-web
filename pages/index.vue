@@ -38,28 +38,39 @@ export default {
   data() {
     return {};
   },
-  async asyncData({ $axios }) {
-    const tot = await $axios.$get("https://olympia-api.phoinix.ai/tots");
-    const playersSpecialStats = await $axios.$get(
-      "https://olympia-api.phoinix.ai/special_stats_player"
-    );
-    const mostValuableYoungPlayer = await $axios.$get(
-      "https://olympia-api.phoinix.ai/mvyp"
-    );
-    const mostValuablePlayer = await $axios.$get(
-      "https://olympia-api.phoinix.ai/mvp"
-    );
-    const mostValuableGoalKeeper = await $axios.$get(
-      "https://olympia-api.phoinix.ai/mvgk"
-    );
+  computed: {
+    tot() {
+      return this.$store.getters["home/tot"];
+    },
+    playersSpecialStats() {
+      return this.$store.getters["home/playersSpecialStats"];
+    },
+    mostValuableYoungPlayer() {
+      return this.$store.getters["home/mostValuableYoungPlayer"];
+    },
+    mostValuablePlayer() {
+      return this.$store.getters["home/mostValuablePlayer"];
+    },
+    mostValuableGoalKeeper() {
+      return this.$store.getters["home/mostValuableGoalKeeper"];
+    }
+  },
+  async asyncData({ $axios, store }) {
+    try {
+      const tot = await $axios.$get("tots");
+      const playersSpecialStats = await $axios.$get("special_stats_player");
+      const mostValuableYoungPlayer = await $axios.$get("mvyp");
+      const mostValuablePlayer = await $axios.$get("mvp");
+      const mostValuableGoalKeeper = await $axios.$get("mvgk");
 
-    return {
-      playersSpecialStats,
-      tot,
-      mostValuableGoalKeeper,
-      mostValuablePlayer,
-      mostValuableYoungPlayer
-    };
+      store.commit("home/setTot", tot);
+      store.commit("home/setPlayersSpecialStats", playersSpecialStats);
+      store.commit("home/setMostValuableYoungPlayer", mostValuableYoungPlayer);
+      store.commit("home/setMostValuablePlayer", mostValuablePlayer);
+      store.commit("home/setMostValuableGoalKeeper", mostValuableGoalKeeper);
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>

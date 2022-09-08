@@ -1,7 +1,7 @@
 <template>
 <head class="header flex align_center center">
   <div class="container flex align_center">
-    <nuxt-link :to="localePath(`/`)" tag="div" class="brand flex align_center center mr-5">
+    <nuxt-link :to="localePath(`/`)" tag="div" class="pointer brand flex align_center center mr-5">
       <img src="@/static/img/brand/logo.png" alt="logo" />
       <img src="@/static/img/brand/logo_type.png" alt="logo type" />
     </nuxt-link>
@@ -17,7 +17,7 @@ export default {
       menu: menu
     };
   },
-
+  
   mounted() {
     console.log(this.$i18n.locale);
   }

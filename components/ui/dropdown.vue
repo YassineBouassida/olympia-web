@@ -8,6 +8,7 @@
         class="link pa-2 pointer"
         v-for="(link, index) in linkGroup.editions"
         :key="link.id + index"
+        @click.native="closeMenu"
       >{{ link[`name_${$i18n.locale}`] }}</nuxt-link>
     </div>
   </div>
@@ -20,6 +21,7 @@ export default {
       opened: false
     };
   },
+ 
   methods: {
     closeMenu() {
       this.opened = false;

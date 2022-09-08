@@ -288,7 +288,9 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseUrl:"https://olympia-api.phoinix.ai/"
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {},
