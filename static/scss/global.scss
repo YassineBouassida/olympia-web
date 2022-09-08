@@ -1,0 +1,601 @@
+.flex {
+  display: flex !important;
+}
+
+.none {
+  display: none;
+}
+
+// * {
+//   user-select: none;
+// }
+
+:root {
+  --font-size: 9rem
+}
+
+.rtl {
+  direction: rtl;
+}
+
+img {
+  pointer-events: none;
+}
+
+@media(max-width:1600px) {
+  :root {
+    --font-size: 7rem
+  }
+}
+
+@media(max-width:1024px) {
+  :root {
+    --font-size: 6rem
+  }
+}
+
+.loading_page {
+  height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  font-family: $semiBold;
+  color: map-get($map: $colors, $key:Text);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-family: $semiBold;
+  color: map-get($map: $colors, $key:Text);
+
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-family: $regular;
+}
+
+.h4 {
+  font-size: 1rem;
+  font-family: $regular;
+  color: map-get($map: $colors, $key:Primary);
+  font-weight: normal;
+
+}
+
+h4 {
+  font-size: 1rem;
+  font-family: $regular;
+  color: map-get($map: $colors, $key:Primary);
+  font-weight: normal;
+
+}
+
+.a {
+  font-size: 0.875rem;
+  font-family: $bold;
+  text-decoration: none;
+  color: map-get($map: $colors, $key:GreyText);
+
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  font-size: 1.125rem;
+  font-family: $light;
+  color: map-get($map: $colors, $key:GreyText);
+
+}
+
+.f_link {
+  font-size: 1rem;
+  font-family: $bold;
+  text-decoration: none;
+  color: map-get($map: $colors, $key:GreyText);
+
+}
+
+.hero_text {
+  font-size: 3.25rem;
+  font-family: $bold;
+  color: map-get($map: $colors, $key:Text);
+
+}
+
+.subheading {
+  font-size: 1rem;
+  font-family: $semiBold;
+  text-decoration: none;
+  color: map-get($map: $colors, $key:GreyText);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0 !important;
+  font-family: $regular;
+
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.grow2 {
+  flex-grow: 2;
+}
+
+.shrink0 {
+  flex-shrink: 0;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.center {
+  justify-content: center;
+}
+
+.space_between {
+  justify-content: space-between;
+}
+
+.space_around {
+  justify-content: space-around;
+}
+
+.start {
+  justify-content: flex-start;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.align_center {
+  align-items: center;
+}
+
+.align_end {
+  align-items: end;
+}
+
+.align_baseline {
+  align-items: baseline;
+}
+
+.align_start {
+  align-items: start;
+}
+
+.txt_center {
+  text-align: center;
+}
+
+.txt_left {
+  text-align: left;
+}
+
+.txt_right {
+  text-align: right;
+}
+
+.fill_width {
+  width: 100%
+}
+
+.fill_height {
+  height: 100%;
+}
+
+.overlay::after {
+  content: "";
+  background: rgba(0, 0, 0, 0.83);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5
+}
+
+.overlay_light {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.flex0 {
+  flex: 0;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex2 {
+  flex: 2;
+}
+
+.field {
+  margin-top: .5rem;
+}
+
+.mobile {
+  @media (min-width: 1025px) {
+    display: none !important;
+  }
+
+}
+
+.desktop {
+  @media (max-width: 1024px) {
+    display: none !important;
+  }
+
+}
+
+.container {
+  padding: 0 1rem;
+  margin: 0 auto;
+
+  @media (min-width: 1641px) {
+    width: 1600px !important;
+
+  }
+
+  @media (min-width: 1201px) and (max-width: 1640px) {
+    width: 1160px !important;
+
+
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
+    width: 980px !important;
+
+  }
+
+  @media (min-width: 975px) and (max-width: 1024px) {
+    width: 930px !important;
+
+  }
+
+  @media (min-width: 870px) and (max-width: 975px) {
+    width: 830px !important;
+
+  }
+
+  @media (min-width: 768px) and (max-width: 870px) {
+    width: 730px !important;
+
+  }
+
+  @media (min-width: 660px) and (max-width: 767px) {
+    width: 620px !important;
+
+  }
+
+  @media (min-width: 560px) and (max-width: 660px) {
+    width: 520px !important;
+
+  }
+
+  @media (min-width: 481px) and (max-width: 560px) {
+    width: 440px !important;
+
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 100% !important;
+
+  }
+
+
+}
+
+.elevate_0 {
+  box-shadow: none !important;
+}
+
+.elevate_1 {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) !important;
+}
+
+.elevate_2 {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.16);
+}
+
+// Simple
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, .9);
+}
+
+.fit_container {
+  width: calc(100% - 2rem) !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+html {
+  font-size: 16px;
+  background: map-get($map: $colors, $key:LightGrey);
+
+  @media (max-width: 1440px) {
+    font-size: 15px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 12px;
+  }
+}
+
+.ml-2 {
+  margin-left: .6rem;
+}
+
+.border {
+  border: $border
+}
+
+
+
+
+
+.input {
+
+  height: 3rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  border: $border;
+  padding: 1rem;
+}
+
+.black {
+  color: map-get($colors, black)
+}
+
+.is-valid {
+  input {
+    border: 1px solid map-get($map: $colors, $key:Info);
+  }
+
+  span {
+    color: map-get($map: $colors, $key:Info);
+  }
+}
+
+.is-invalid {
+
+  input,
+  textarea,
+  .btn {
+    border: 1px solid map-get($map: $colors, $key:Error);
+  }
+
+  span {
+    color: map-get($map: $colors, $key:Error);
+    font-size: .8rem;
+  }
+
+}
+
+.logo {
+  .a {
+
+    fill: url(#logoGradient);
+  }
+}
+
+.d_block {
+  display: block;
+}
+
+.btn {
+  &a {
+    display: block;
+  }
+
+  border-radius: 5px;
+  border: none;
+  height: 2.5rem;
+  position: relative;
+  transition: .1s all;
+  cursor: pointer;
+
+  &:hover::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.13);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: inherit;
+  }
+
+  &:focus {
+    outline: none;
+
+  }
+
+  &:active {
+
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+
+  }
+
+  span {
+    position: relative;
+    z-index: 2;
+  }
+
+  &.required {
+    animation: bounce .3s 4 alternate;
+    box-shadow: 0 2px 10px rgba(207, 1, 1, 0.2);
+
+  }
+}
+
+//for ios safari browsers
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
+}
+
+.load_spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid map-get($map: $colors, $key: Primary);
+  border-radius: 100%;
+}
+
+.open_spinner {
+  border-top: 2px solid transparent;
+  animation: load-animate infinite linear 1s;
+}
+
+
+@keyframes load-animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active,
+.slide-fade-reverse-enter-active,
+.slide-down-reverse-enter-active,
+.slide-down-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.slide-fade-reverse-leave-active,
+.slide-down-reverse-leave-active,
+.slide-fade-leave-active,
+.slide-down-leave-active {
+  transition: all 0.5s ease-in;
+}
+
+.slide-fade-reverse-enter,
+.slide-fade-reverse-leave-to
+
+/* .slide-fade-leave-active below version 2.1.8 */
+  {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to
+
+/* .slide-fade-leave-active below version 2.1.8 */
+  {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-down-enter,
+.slide-down-leave-to
+
+/* .slide-fade-leave-active below version 2.1.8 */
+  {
+  transform: translateY(100%);
+}
+
+.slide-down-reverse-enter,
+.slide-down-reverse-leave-to
+
+/* .slide-fade-leave-active below version 2.1.8 */
+  {
+  transform: translateY(-100%);
+}

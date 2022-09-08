@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'metropolis Regular';
+  src: url('metropolis.regular.otf');
+
+}
+
+@font-face {
+  font-family: 'metropolis SemiBold';
+  src: url('metropolis.semi-bold.otf');
+}
+
+@font-face {
+  font-family: 'metropolis Bold';
+  src: url('metropolis.bold.otf');
+}
+
+@font-face {
+  font-family: 'metropolis Light';
+  src: url('metropolis.light.otf');
+}

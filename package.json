@@ -1,0 +1,33 @@
+{
+  "name": "ftm",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/html-minifier": "^0.1.2",
+    "@nuxtjs/i18n": "^7.0.3",
+    "@nuxtjs/pwa": "^3.3.5",
+    "core-js": "^3.15.1",
+    "fs": "^0.0.1-security",
+    "nuxt": "^2.15.8",
+    "nuxt-compress": "^5.0.0",
+    "nuxt-font-loader-strategy": "^1.1.10",
+    "nuxt-i18n-easy": "^1.5.1",
+    "nuxt-precompress": "^0.5.9",
+    "nuxt-ssr-cache": "^1.5.2",
+    "vue-clickaway": "^2.2.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.2.1",
+    "fibers": "^5.0.0",
+    "node-sass": "^6.0.1",
+    "nuxt-gsap-module": "^1.5.0",
+    "sass-loader": "^10.2.0"
+  }
+}

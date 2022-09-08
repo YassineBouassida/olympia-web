@@ -1,0 +1,26 @@
+$colors: (Primary: #002366,
+  Text: #212529,
+  Alpha: rgba(255, 255, 255, .55),
+  Beta: rgba(255, 255, 255, .75),
+  LightGrey: #E4E5E5,
+  White: #FFFFFF,
+  BorderLine: #B2BEBE,
+  GreyText: #71797E,
+  Info: blue,
+  Success: green,
+  Error: red,
+  top: gold,
+  medium: yellow,
+  bottom: black,
+);
+$gradients: (horizontal: linear-gradient(100deg, #333333 0%, #875454 100%) 0% 0%,
+
+);
+
+.text {
+  @include color-modifiers($attribute: 'color', $prefix: '_');
+}
+
+.bg {
+  @include color-modifiers($attribute: 'background', $prefix: '_');
+}
