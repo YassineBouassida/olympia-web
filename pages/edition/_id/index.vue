@@ -51,4 +51,41 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.most_valuable {
+  width: 400px;
+}
+.stats_list {
+  .stat {
+    @media (max-width: 1200px) {
+      width: 49% !important;
+    }
+    @media (max-width: 1024px) {
+      width: 100% !important;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 480px) {
+      &:deep .avatar {
+        width: 50px !important;
+        height: 50px !important;
+      }
+      &:deep .stat_details {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+.rewards {
+  @media (max-width: 1024px) {
+    .top_players {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .classement {
+        width: 100%;
+      }
+    }
+  }
+}
 </style>

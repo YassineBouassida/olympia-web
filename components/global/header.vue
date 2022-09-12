@@ -25,7 +25,7 @@
     <!-- ********************** -->
   </div>
   <!-- Mobile Nav drawer -->
-  <div class="nav_drawer bg_Primary px-3" :class="{opened:openMenu}">
+  <div class="nav_drawer bg_Primary px-3 mobile" :class="{opened:openMenu}" id="navDrawer">
     <close class="close_sign" :reverse="!openMenu" @click.native="openMenu=false"></close>
     <div class="links_list relative">
       <div class="txt_center" v-for="(linkGroup, index) in menu" :key="index">
@@ -59,6 +59,23 @@ export default {
 
   mounted() {
     console.log(this.$i18n.locale);
+  },
+  computed: {
+    viewPort() {
+      return this.$store.getters["style/viewPort"];
+    }
+  },
+  watch: {
+    viewPort: {
+      handler: size => {
+        if (size == "sm" || size == "xs") {
+          let navdrawerContainer = document.getElementById("navDrawer");
+          let windowHeight = window.innerHeight;
+          navdrawerContainer.style.height = windowHeight + "px";
+        }
+      },
+      immediate: true
+    }
   }
 };
 </script>
