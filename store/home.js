@@ -1,9 +1,15 @@
+import {
+  tot,
+  playersSpecialStats,
+  mostValuablePlayer,
+  mostValuableGoalKeeper,
+} from "@/dummyData/home";
 export const state = () => ({
-  tot: [],
-  playersSpecialStats: [],
-  mostValuableYoungPlayer: {},
-  mostValuablePlayer: {},
-  mostValuableGoalKeeper: {},
+  tot: tot,
+  playersSpecialStats: playersSpecialStats,
+  mostValuableYoungPlayer: mostValuablePlayer,
+  mostValuablePlayer: mostValuablePlayer,
+  mostValuableGoalKeeper: mostValuableGoalKeeper,
 });
 export const getters = {
   tot(state) {

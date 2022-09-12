@@ -1,7 +1,8 @@
 <template>
   <div class="flex column app" :class="{ rtl: rtl, ltr: !rtl }">
-    <Header></Header>
-    <nuxt class="main container" />
+    <Header class="header" :class="{sticky:sticky}"></Header>
+    <div v-if="isLoading" class="loading_screen">Loading ....</div>
+    <nuxt v-else class="main container" />
   </div>
 </template>
 <style lang="scss">
@@ -15,7 +16,8 @@
 .app {
   min-height: 100vh;
 }
-.main {
+.main,
+.loading_screen {
   flex-grow: 2;
 }
 </style>
@@ -28,21 +30,21 @@ export default {
   head() {
     return {
       htmlAttrs: {
-        lang: this.$i18n.locale,
+        lang: this.$i18n.locale
       },
       link: [
         {
           hid: "canonical",
           rel: "canonical",
-          href: `${process.env.hostname}${this.$route.path}`,
-        },
-      ],
+          href: `${process.env.hostname}${this.$route.path}`
+        }
+      ]
     };
   },
   data() {
     return {
       lastScrollY: 0,
-      sticky: false,
+      sticky: false
     };
   },
   beforeMount() {
@@ -59,18 +61,21 @@ export default {
   },
   methods: {
     handleScroll(y) {
-      if (this.lastScrollY > window.scrollY && window.scrollY > 150) {
+      if (this.lastScrollY > window.scrollY && window.scrollY > 100) {
         this.sticky = true;
       } else {
         this.sticky = false;
       }
       this.lastScrollY = window.scrollY;
-    },
+    }
   },
   computed: {
     rtl() {
       return this.$i18n.localeProperties.dir == "rtl";
     },
-  },
+    isLoading() {
+      return this.$store.getters["loading/isLoading"];
+    }
+  }
 };
 </script>

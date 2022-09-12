@@ -44,6 +44,5 @@ export default {
   background-repeat: no-repeat;
 }
 .row {
-  height: 125px;
 }
 </style>

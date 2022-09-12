@@ -38,7 +38,7 @@ export default {
   fill: #fff;
 }
 .close {
-  animation: rotation 1s 0.8s forwards;
+  animation: rotation 1s 0.3s forwards;
 }
 .reverse {
   animation: rotation_reverse 0.5s 0s forwards;
