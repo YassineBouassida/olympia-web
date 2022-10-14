@@ -1,69 +1,114 @@
 <template>
-  <div>
-    <div class="flex align_center tabs_nav">
-      <nuxt-link
-        tag="div"
-        class="flex align_center center tab_logo pointer"
-        :to="localePath(`/edition/${id}`)"
-      >
-        <img src="http://olympia.phoinix.ai/pictures/editions/1_2.png" alt="euro 2020" />
-      </nuxt-link>
-      <nuxt-link
-        :to="localePath(`/edition/${id}/${link.link}`)"
-        tag="h4"
-        class="link pa-2 pointer text_Primary"
-        v-for="(link, index) in tabLinks"
-        :key="link.key + index"
-      >{{ link[`name_${$i18n.locale}`] }}</nuxt-link>
+  <div v-if="!isLoading">
+    <div class="tabs_nav" :class="{stickyTab:sticky}">
+      <div class="flex align_center container">
+        <nuxt-link
+          tag="div"
+          class="flex align_center center tab_logo pointer"
+          :to="localePath(`/edition/${id}`)"
+        >
+          <img :src="submenu.logo" alt="euro 2020" />
+        </nuxt-link>
+        <nuxt-link
+          :to="localePath(`/edition/${id}${link.link}`)"
+          tag="h4"
+          class="link pa-2 pointer text_Primary"
+          v-for="(link, index) in submenu.items"
+          :key="index"
+        >{{ link[`name_${$i18n.locale}`] }}</nuxt-link>
+      </div>
     </div>
-    <div class="progress_tab my-3">
-      <h4 class="txt_right my-1">
-        Completed Games:
-        <strong>51</strong>
-      </h4>
-      <div class="progress_bar bg_Primary w-100"></div>
-      <h4 class="txt_right my-1">
-        Scheduled Games:
-        <strong>51</strong>
-      </h4>
-    </div>
+
     <nuxt />
   </div>
+  <loading v-else></loading>
 </template>
 <script>
 export default {
-  data() {
-    return {
-      tabLinks: [
-        { key: 1, name_en: "Games", link: "games" },
-        { key: 2, name_en: "Group Stage", link: "group-stage" },
-        { key: 3, name_en: "Knock Out Stage", link: "knock-out-stage" },
-        { key: 4, name_en: "Teams", link: "teams" },
-        { key: 5, name_en: "Players", link: "players" }
-      ]
-    };
-  },
   computed: {
+    sticky() {
+      return this.$store.getters["style/stickyHeader"];
+    },
     id() {
       return this.$route.params.id;
+    },
+    submenu() {
+      const result = this.$store.getters["edition/subMenu"];
+      return result;
+    },
+    stats() {
+      const result = this.$store.getters["edition/stats"];
+      return result;
+    },
+    isLoading() {
+      return this.$store.getters["loading/isLoading"].submenu;
     }
+  },
+  async fetch() {
+    await this.$store.dispatch("edition/fetchSubMenu", this.$route.params.id);
+    await this.$store.dispatch("edition/fetchStats", this.$route.params.id);
+    await this.$store.dispatch("edition/fetchTot", this.$route.params.id);
+    await this.$store.dispatch(
+      "edition/fetchMostValuableYoungPlayer",
+      this.$route.params.id
+    );
+    await this.$store.dispatch(
+      "edition/fetchMostValuablePlayer",
+      this.$route.params.id
+    );
+    await this.$store.dispatch(
+      "edition/fetchMostValuableGoalKeeper",
+      this.$route.params.id
+    );
   }
 };
 </script>
 <style lang="scss" scoped>
 .tabs_nav {
-  height: 60px;
-  border-bottom: 5px solid map-get($map: $colors, $key: Primary);
-  .tab_logo {
+  .nuxt-link-exact-active {
     height: 100%;
-    width: 100px;
-    img {
-      height: 90%;
+    border-bottom: 3px solid map-get($map: $colors, $key: Primary);
+    &.tab_logo {
+      background: map-get($map: $colors, $key: LightGrey);
+      border-bottom: none !important;
     }
   }
-}
-.progress_bar {
-  height: 10px;
-  border-radius: 5px;
+  &.stickyTab {
+    top: 100px;
+  }
+  position: sticky;
+  top: 0;
+  border-bottom: 2px solid map-get($map: $colors, $key: Primary);
+  background: map-get($map: $colors, $key: White);
+  z-index: 99;
+
+  @media (max-width: 1024px) {
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .link {
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 375px) {
+      .link {
+        min-width: 120px;
+      }
+    }
+  }
+
+  .container {
+    height: 60px;
+    .tab_logo {
+      height: 100%;
+      width: 100px;
+      img {
+        height: 90%;
+      }
+    }
+  }
 }
 </style>

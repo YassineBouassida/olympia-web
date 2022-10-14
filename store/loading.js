@@ -1,5 +1,5 @@
 export const state = () => ({
-  loading: false,
+  loading: { submenu: false, games: false, home: false },
 });
 export const getters = {
   isLoading(state) {
@@ -13,6 +13,6 @@ export const actions = {
 };
 export const mutations = {
   setLoading(state, cmd) {
-    state.loading = cmd;
+    state.loading = { ...state.loading, ...cmd };
   },
 };

@@ -1,8 +1,7 @@
 <template>
   <div class="flex column app" :class="{ rtl: rtl, ltr: !rtl }">
     <Header class="header" :class="{sticky:sticky}"></Header>
-    <div v-if="isLoading" class="loading_screen">Loading ....</div>
-    <nuxt v-else class="main container" />
+    <nuxt class="main" />
   </div>
 </template>
 <style lang="scss">
@@ -67,6 +66,7 @@ export default {
         this.sticky = false;
       }
       this.lastScrollY = window.scrollY;
+      this.$store.dispatch("style/changeStickyHeader", this.sticky);
     }
   },
   computed: {

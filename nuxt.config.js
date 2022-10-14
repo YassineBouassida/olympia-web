@@ -84,10 +84,22 @@ export default {
     strapiBaseUri: process.env.API_URL,
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~static/css/global.css"],
+  css: [
+    "~static/css/global.css",
+    "@fortawesome/fontawesome-svg-core/styles.css",
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/string-cutter.js", "~/plugins/clickaway.js"],
+  plugins: [
+    "~/plugins/string-cutter.js",
+    "~/plugins/clickaway.js",
+    {
+      src: "~/plugins/vue-listable.js",
+    },
+    {
+      src: "~/plugins/vueTable.js",
+    },
+  ],
   loading: {
     color: "#E02B2B",
     height: "3px",
@@ -98,6 +110,7 @@ export default {
     "~/components",
     "~/components/ui",
     "~/components/home",
+    "~/components/editions",
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -105,6 +118,7 @@ export default {
     "@nuxtjs/style-resources",
     "nuxt-compress",
     "nuxt-gsap-module",
+    "@nuxtjs/fontawesome",
   ],
   styleResources: {
     scss: [
@@ -120,6 +134,7 @@ export default {
 
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
+    "@nuxtjs/proxy",
     // https://go.nuxtjs.dev/pwa
     "@nuxtjs/pwa",
     "nuxt-compress",
@@ -190,6 +205,13 @@ export default {
       },
     ],
   ],
+  fontawesome: {
+    component: "Fa",
+    suffix: false,
+    icons: {
+      solid: true,
+    },
+  },
   cache: {
     useHostPrefix: false,
     pages: [
@@ -289,9 +311,16 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: "https://olympia-api.phoinix.ai/",
+    proxy: true,
+    credentials: true,
   },
-
+  proxy: {
+    "/api/": {
+      target: "https://olympia-api.phoinix.ai/",
+      pathRewrite: { "^/api/": "" },
+      changeOrigin: true,
+    },
+  },
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {},
 

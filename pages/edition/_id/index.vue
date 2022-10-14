@@ -1,5 +1,25 @@
 <template>
-  <div>
+  <div class="container" v-if="stats">
+    <div class="progress_tab my-3">
+      <h4 class="txt_right my-1">
+        Completed Games:
+        <strong>{{stats.completed_games}}</strong>
+      </h4>
+      <div class="progress_bar bg_Primary w-100"></div>
+      <h4 class="txt_right my-1">
+        Scheduled Games:
+        <strong>{{stats.all_games}}</strong>
+      </h4>
+    </div>
+    <!-- Key stats  -->
+    <section class="olympia_rewards py-4">
+      <headline :text="$t('editions.keyStats')"></headline>
+      <div class="flex space_between mt-2 stats_list">
+        <playersStatsCard class="w-30 stat" :stats="stats"></playersStatsCard>
+        <cardsStatsCard class="w-30 stat" :stats="stats"></cardsStatsCard>
+        <goalStatsCard class="w-30 stat" :stats="stats"></goalStatsCard>
+      </div>
+    </section>
     <!-- Olympia Rewards Top 5 Leagues -->
 
     <section class="olympia_rewards py-4">
@@ -23,7 +43,7 @@
           ></mostValuable>
         </div>
         <div class="season_team flex2 bg_White ml-2 pa-2 mb-2 flex column">
-          <subtitle text="Team Of The Season"></subtitle>
+          <subtitle>Team Of The Season</subtitle>
           <div class="w-100 flex align_center center my-3 flex2">
             <stadium :players="tot"></stadium>
           </div>
@@ -31,21 +51,28 @@
       </div>
     </section>
   </div>
+  <loading v-else></loading>
 </template>
 <script>
 export default {
   computed: {
+    stats() {
+      return this.$store.getters["edition/stats"];
+    },
     tot() {
-      return this.$store.getters["home/tot"];
+      return this.$store.getters["edition/tot"];
     },
     mostValuableYoungPlayer() {
-      return this.$store.getters["home/mostValuableYoungPlayer"];
+      return this.$store.getters["edition/mostValuableYoungPlayer"];
     },
     mostValuablePlayer() {
-      return this.$store.getters["home/mostValuablePlayer"];
+      return this.$store.getters["edition/mostValuablePlayer"];
     },
     mostValuableGoalKeeper() {
-      return this.$store.getters["home/mostValuableGoalKeeper"];
+      return this.$store.getters["edition/mostValuableGoalKeeper"];
+    },
+    isLoading() {
+      return this.$store.getters["loading/isLoading"].stats;
     }
   }
 };
@@ -54,10 +81,16 @@ export default {
 .most_valuable {
   width: 400px;
 }
+.progress_bar {
+  height: 10px;
+  border-radius: 5px;
+}
 .stats_list {
+  flex-wrap: wrap;
   .stat {
     @media (max-width: 1200px) {
       width: 49% !important;
+      margin-bottom: 1rem;
     }
     @media (max-width: 1024px) {
       width: 100% !important;

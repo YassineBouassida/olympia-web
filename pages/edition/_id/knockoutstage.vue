@@ -5,7 +5,7 @@
       <select name="select" id v-model="selectedStageIndex" class="mx-3 px-2">
         <option
           :value="index"
-          v-for="(stage, index) in games"
+          v-for="(stage, index) in knockoutstage"
           :key="index"
         >{{ stage[`title_${$i18n.locale}`] }}</option>
       </select>
@@ -68,7 +68,10 @@
 import { fas } from "@fortawesome/free-solid-svg-icons";
 export default {
   async fetch() {
-    await this.$store.dispatch("edition/fetchGames", this.$route.params.id);
+    await this.$store.dispatch(
+      "edition/fetchKnockOutStage",
+      this.$route.params.id
+    );
   },
   data() {
     return {
@@ -81,13 +84,13 @@ export default {
     },
 
     isLoading() {
-      return this.$store.getters["loading/isLoading"].games;
+      return this.$store.getters["loading/isLoading"].knockOutStage;
     },
-    games() {
-      return this.$store.getters["edition/games"];
+    knockoutstage() {
+      return this.$store.getters["edition/knockoutstage"];
     },
     selectedStage() {
-      return this.games[this.selectedStageIndex];
+      return this.knockoutstage[this.selectedStageIndex];
     }
   }
 };

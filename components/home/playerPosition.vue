@@ -1,9 +1,13 @@
 <template>
   <div class="player_position flex column align_center">
     <div class="rating relative">{{profile.rating}}</div>
-    <avatar class="avatar" :url="profile.player_picture" size="60"></avatar>
-    <div class="player_name relative txt_center">{{profile.player_name}}</div>
-    <avatar class="flag relative" url="http://olympia.phoinix.ai/pictures/clubs/43.png" size="25"></avatar>
+    <nuxt-link :to="localePath(`/player/${profile.player_id}`)" :title="profile.player_name_latin">
+      <avatar class="avatar" :url="profile.player_picture" size="60"></avatar>
+    </nuxt-link>
+    <div class="player_name relative txt_center">{{profile.player_name_latin}}</div>
+    <nuxt-link :to="localePath(`/team/${profile.team_club_id}`)" :title="profile.team_club_id">
+      <avatar class="flag relative" :url="profile.team_club_logo" size="25"></avatar>
+    </nuxt-link>
   </div>
 </template>
 <script>

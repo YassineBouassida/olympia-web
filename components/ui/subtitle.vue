@@ -1,12 +1,12 @@
 <template>
   <div class="headline flex">
-    <h3 class="relative pb-1">{{ text }}</h3>
+    <h3 class="relative pb-1">
+      <slot></slot>
+    </h3>
   </div>
 </template>
 <script>
-export default {
-  props: ["text"]
-};
+export default {};
 </script>
 <style lang="scss" scoped>
 .headline {

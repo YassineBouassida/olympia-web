@@ -1,5 +1,38 @@
 <template>
-  <div>
+  <div class="container">
+    <section class="game_bar flex start py-4">
+      <div class="game_bar_card mx-3 pa-2 pointer" v-for="(game, index) in gameBar" :key="index">
+        <div class="flex align_center center">
+          <img height="15" width="15" :src="game.edition_logo" @error="imageUrlAlt" alt="game name" />
+          <h4 class="t-10">
+            <strong>{{game[`edition_name_${$i18n.locale}`]}}</strong>
+          </h4>
+        </div>
+        <h4 class="my-2 txt_center">{{game.datetime}}</h4>
+        <div class="flex align_center space_between mt-3">
+          <img
+            :title="game.team1_name"
+            height="40"
+            width="40"
+            :src="game.team1_icon"
+            @error="imageUrlAlt"
+            :alt="game.team1_name"
+          />
+          <h3>:</h3>
+          <img
+            :title="game.team2_name"
+            height="40"
+            width="40"
+            :src="game.team2_icon"
+            @error="imageUrlAlt"
+            :alt="game.team1_name"
+          />
+        </div>
+        <h4 class="my-2 txt_center">
+          <strong>{{game[`context_${$i18n.locale}`]}}</strong>
+        </h4>
+      </div>
+    </section>
     <!-- Special Stats Section -->
     <section class="special_stats py-4">
       <headline :text="$t('home.specialStats')"></headline>
@@ -31,7 +64,7 @@
           ></mostValuable>
         </div>
         <div class="season_team flex2 bg_White ml-2 pa-2 mb-2 flex column">
-          <subtitle text="Team Of The Season"></subtitle>
+          <subtitle>Team Of The Season</subtitle>
           <div class="w-100 flex align_center center my-3 flex2">
             <stadium :players="tot"></stadium>
           </div>
@@ -46,7 +79,15 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    imageUrlAlt(event) {
+      event.target.src = "https://olympia.phoinix.ai/pictures/editions/1_2.png";
+    }
+  },
   computed: {
+    gameBar() {
+      return this.$store.getters["home/gameBar"];
+    },
     tot() {
       return this.$store.getters["home/tot"];
     },
@@ -63,29 +104,34 @@ export default {
       return this.$store.getters["home/mostValuableGoalKeeper"];
     }
   },
+  async fetch() {
+    this.$store.dispatch("loading/chnageLoadingState", { home: true });
+    await this.$store.dispatch("home/fetchGameBar");
+    await this.$store.dispatch("home/fetchTot");
+    await this.$store.dispatch("home/fetchPlayersSpecialStats");
+    await this.$store.dispatch("home/fetchMostValuableYoungPlayer");
+    await this.$store.dispatch("home/fetchMostValuablePlayer");
+    await this.$store.dispatch("home/fetchMostValuableGoalKeeper");
+    this.$store.dispatch("loading/chnageLoadingState", { home: false });
+  },
   async asyncData({ $axios, store }) {
     try {
-      store.dispatch("loading/chnageLoadingState", true);
-
-      const tot = await $axios.$get("tots");
-      const playersSpecialStats = await $axios.$get("special_stats_player");
-      const mostValuableYoungPlayer = await $axios.$get("mvyp");
-      const mostValuablePlayer = await $axios.$get("mvp");
-      const mostValuableGoalKeeper = await $axios.$get("mvgk");
-
-      store.commit("home/setTot", tot);
-      store.commit("home/setPlayersSpecialStats", playersSpecialStats);
-      store.commit("home/setMostValuableYoungPlayer", mostValuableYoungPlayer);
-      store.commit("home/setMostValuablePlayer", mostValuablePlayer);
-      store.commit("home/setMostValuableGoalKeeper", mostValuableGoalKeeper);
-      store.dispatch("loading/chnageLoadingState", false);
     } catch (error) {
-      store.dispatch("loading/chnageLoadingState", false);
+      store.dispatch("loading/chnageLoadingState", { home: false });
     }
   }
 };
 </script>
 <style lang="scss" scoped>
+.game_bar {
+  overflow-x: auto;
+  user-select: none;
+  .game_bar_card {
+    min-width: 150px;
+    min-height: 150px;
+    border: 1px solid map-get($map: $colors, $key: Text);
+  }
+}
 .most_valuable {
   width: 400px;
 }
