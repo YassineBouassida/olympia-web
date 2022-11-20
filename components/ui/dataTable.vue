@@ -1,27 +1,24 @@
 <template>
   <div>
-    <!-- <listable
-      :headings="headings"
-      :data="items"
-      :responsive="true"
-      :hook="onHook"
-      :rowHook="onRowHook"
-      class="table"
-    />-->
     <vuetable
       class="table"
       ref="vuetable"
       :api-mode="false"
       :fields="headings"
-      :data="items"
       :css="table"
+      :data-manager="dataManager"
     >
       <div slot="Team" slot-scope="props">
-        <div class="flex align_center pl-4 team_cel" v-if="props.rowData.Team">
+        <nuxt-link
+          :to="localePath(`/team/${props.rowData.TeamId}`)"
+          tag="div"
+          class="pointer flex align_center pl-4 team_cel"
+          v-if="props.rowData.Team"
+        >
           <img
             :src="
               props.rowData.Team.TeamIcon ||
-              'http://olympia.phoinix.ai/pictures/nations/171.png'
+              'http://olympia.phoinix.ai/pictures/nations/0.png'
             "
             :alt="props.rowData.Team.TeamName"
             @error="imageUrlAlt"
@@ -30,7 +27,7 @@
             class="team_image"
           />
           <h4 class="ml-2">{{ props.rowData.Team.TeamName }}</h4>
-        </div>
+        </nuxt-link>
       </div>
       <div slot="Rank" slot-scope="props" class="h-100">
         <div
@@ -42,13 +39,18 @@
           <h3>{{props.rowData.Rank}}</h3>
         </div>
       </div>
+      <div slot="Pts" slot-scope="props" class="h-100">
+        <div class="h-100 flex align_center center rank" v-if="props.rowData.Pts!=undefined">
+          <h3>{{props.rowData.Pts}}</h3>
+        </div>
+      </div>
     </vuetable>
   </div>
 </template>
 <script>
 import vuetable from "vuetable-2";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-
+import _ from "lodash";
 export default {
   components: { vuetable },
   props: ["headings", "items"],
@@ -59,15 +61,17 @@ export default {
       tableBodyClass: "mb-0",
       tableClass: "table table-bordered table-hover",
       loadingClass: "loading",
-      ascendingIcon: "fa fa-chevron-up",
-      descendingIcon: "fa fa-chevron-down",
-      ascendingClass: "sorted-asc",
-      descendingClass: "sorted-desc",
-      sortableIcon: "fa fa-sort",
+      ascendingIcon: "faChevronUp",
+      descendingIcon: "faChevronDown",
+      ascendingClass: "sortedAsc",
+      descendingClass: "sortedDesc",
+      sortableIcon: "faSort",
       detailRowClass: "vuetable-detail-row",
       handleIcon: "fa fa-bars text-secondary",
       renderIcon(classes, options) {
-        return `<i class="${classes.join(" ")}" ${options}></span>`;
+        let fa = fas[classes[1]];
+
+        return `<svg data-v-2b9768fe="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="${fa.iconName}" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${fa.icon[0]} ${fa.icon[1]}" class="t-12 pointer text_Alpha selectIcon svg-inline--fa fa-circle-arrow-left fa-w-16"><path data-v-2b9768fe="" fill="currentColor" d="${fa.icon[4]}" class=""></path></svg>`;
       }
     }
   }),
@@ -77,30 +81,32 @@ export default {
     }
   },
   methods: {
-    promptProps(p) {
-      console.log("props " + JSON.stringify(p));
-    },
+    promptProps(p) {},
     imageUrlAlt(event) {
-      event.target.src = "http://olympia.phoinix.ai/pictures/nations/48.png";
+      event.target.src = "https://olympia-api.phoinix.ai/pictures/clubs/0.png";
+    },
+    dataManager(sortOrder, pagination) {
+      if (this.items.length < 1) return;
+
+      let local = this.items;
+
+      // sortOrder can be empty, so we have to check for that as well
+      if (sortOrder.length > 0) {
+        local = _.orderBy(
+          local,
+          sortOrder[0].sortField,
+          sortOrder[0].direction
+        );
+      }
+
+      return local;
     },
     onHook(calculated, row, column) {
       if (column == "Team") {
         console.log(calculated);
       }
-      // console.info(row);
-      // if (column == "id") {
-      //   calculated.style.backgroundColor = "rgb(225, 225, 225)";
-      // }
-      // if (column == "is_new") {
-      //   // if row.is_new is true a class new is added
-      //   // if row.is_new is false a class new is not added
-      //   calculated.class["new"] = row.is_new;
-      // }
     },
     onRowHook(calculated, row) {
-      // console.info(row);
-      // if row.paid is true a class paid is added
-      // if row.paid is false a class paid is not added
       calculated.class["paid"] = row.is_paid;
     }
   }
@@ -117,7 +123,11 @@ export default {
       background: map-get($map: $colors, $key: Primary);
       color: map-get($map: $colors, $key: White);
       height: 2rem;
+      .vuetable-th-slot-_team {
+        width: 28% !important;
+      }
       th {
+        width: 8%;
         @media (max-width: 767px) {
           padding: 0.5rem;
         }

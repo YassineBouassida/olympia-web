@@ -1,11 +1,11 @@
 <template>
   <div class="links_menu flex align_center relative mx-2" v-on-clickaway="closeMenu">
     <h4 class="pointer" @click="opened = !opened">{{ linkGroup[`name_${$i18n.locale}`] }}</h4>
-    <div class="drop_down bg_White absolute py-1" :class="{ opened: opened }">
+    <div class="drop_down bg_Primary absolute py-1" :class="{ opened: opened }">
       <nuxt-link
         :to="localePath(`/edition/${link.id}`)"
         tag="div"
-        class="link pa-2 pointer"
+        class="link pa-2 pointer text_Alpha"
         v-for="(link, index) in linkGroup.editions"
         :key="link.id + index"
         @click.native="closeMenu"
@@ -21,7 +21,7 @@ export default {
       opened: false
     };
   },
- 
+
   methods: {
     closeMenu() {
       this.opened = false;
@@ -30,6 +30,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.link,
+h4 {
+  font-variant: small-caps;
+}
 .links_menu {
   .drop_down {
     top: 0px;
@@ -44,14 +48,15 @@ export default {
     transition: all 0.5s;
     &.opened {
       display: block;
-      top: 65px;
+      top: 57px;
       opacity: 1;
       visibility: visible;
       z-index: 3;
     }
     .link {
       &:hover {
-        background: map-get($map: $colors, $key: LightGrey);
+        background: map-get($map: $colors, $key: White);
+        color: map-get($map: $colors, $key: Primary) !important;
       }
     }
   }

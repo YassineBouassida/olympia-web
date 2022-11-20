@@ -6,7 +6,7 @@
       <div class="w-30 flex column align_center">
         <div class="flex align_center">
           <h3 class="text_Primary mb-1">{{stats.yellow_cards}}</h3>
-          <img width="32" height="32" src="http://olympia.phoinix.ai/icos/Y.png" alt="yellow card" />
+          <img width="32" height="32" src="@/static/img/icons/yellow_card.svg" alt="yellow card" />
         </div>
         <h4 class="t-8">Yellow Cards</h4>
         <h4 class="t-8">(4.07 per game)</h4>
@@ -17,7 +17,7 @@
           <img
             width="32"
             height="32"
-            src="http://olympia.phoinix.ai/icos/S.png"
+            src="@/static/img/icons/second_yellow_card.svg"
             alt="Second yellowred card"
           />
         </div>
@@ -27,7 +27,7 @@
       <div class="w-30 flex column align_center">
         <div class="flex align_center">
           <h3 class="text_Primary mb-1">{{stats.red_cards}}</h3>
-          <img width="32" height="32" src="http://olympia.phoinix.ai/icos/R.png" alt="red card" />
+          <img width="32" height="32" src="@/static/img/icons/red_card.svg" alt="red card" />
         </div>
         <h4 class="t-8">Red Cards</h4>
         <h4 class="t-8">(0.11 per game)</h4>
@@ -40,4 +40,8 @@ export default {
   props: ["stats"]
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h4 {
+  color: map-get($map: $colors, $key: GreyText);
+}
+</style>

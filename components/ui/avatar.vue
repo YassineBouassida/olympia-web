@@ -18,7 +18,7 @@ export default {
 .avatar {
   border-radius: 100%;
   border: 2px solid map-get($map: $colors, $key: Primary);
-  background-size: 80%;
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }

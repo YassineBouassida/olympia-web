@@ -17,6 +17,7 @@ export default {};
     font-size: 1.25rem;
     font-family: $light;
     color: map-get($map: $colors, $key: Primary);
+    font-variant: small-caps;
   }
 }
 </style>

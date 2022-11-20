@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666665 8.4666669"
+   version="1.1"
+   id="svg3320"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="football.svg">
+  <defs
+     id="defs3314" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="2.8237992"
+     inkscape:cy="11.986961"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3317">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path3608-9-6"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#4d4d4d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.264584;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+       d="m 4.2343748,0.52941683 c -2.044204,0 -3.70520797,1.65843697 -3.70520797,3.70264197 0,2.044171 1.66100397,3.705191 3.70520797,3.705191 2.044172,0 3.703125,-1.66102 3.703125,-3.705191 0,-2.044205 -1.658953,-3.70264197 -3.703125,-3.70264197 z m 1.246936,0.49971797 c 0.557252,0.216834 1.044903,0.572218 1.41697,1.027335 l -0.0176,-0.004 -0.2129,1.091403 c -0.0105,0.0538 -0.01133,0.107567 -0.007,0.160717 l -1.242819,0.393251 c -0.0298,-0.0449 -0.0661,-0.0862 -0.110067,-0.120401 l -0.796869,-0.619084 c -0.044,-0.0343 -0.0931,-0.0576 -0.144167,-0.0734 v -1.246953 c 0.0519,-0.01217 0.1027,-0.0298 0.150367,-0.0563 l 0.970486,-0.541052 z m -2.496488,0 -0.006,0.01133 0.972552,0.541051 c 0.0477,0.0265 0.0985,0.0442 0.150383,0.0563 v 1.246952 c -0.052,0.01567 -0.102033,0.0386 -0.14675,0.0734 l -0.794802,0.619084 c -0.044,0.0342 -0.0798,0.0755 -0.10955,0.120401 l -1.244386,-0.393768 c 0.004,-0.053 0.003,-0.1066 -0.007,-0.1602 l -0.212901,-1.091403 -0.015,0.003 c 0.371518,-0.454218 0.857819,-0.809452 1.413887,-1.026302 z m -1.260387,2.526472 1.24282,0.392734 c -0.003,0.0539 0,0.108367 0.015,0.162267 l 0.263551,0.972552 c 0.015,0.055 0.0416,0.104501 0.0739,0.148834 l -0.718835,1.020602 c -0.0488,-0.0207 -0.1001,-0.0358 -0.154001,-0.0424 l -1.105352,-0.1328 -0.0017,0.01 C 1.0301178,5.6050618 0.83910083,5.0407598 0.80393483,4.4332258 l 0.006,0.006 0.81441797,-0.757569 c 0.0399,-0.0372 0.0723,-0.0801 0.0997,-0.125583 z m 5.018828,0 c 0.0276,0.0454 0.0603,0.0884 0.100251,0.125567 l 0.812351,0.757585 0.008,-0.008 c -0.0348,0.609968 -0.225984,1.176586 -0.537434,1.660354 l -0.002,-0.01333 -1.103286,0.132817 c -0.0543,0.007 -0.105933,0.022 -0.155033,0.0429 l -0.718335,-1.022685 c 0.0318,-0.044 0.0575,-0.0929 0.0724,-0.147267 l 0.265617,-0.972552 c 0.01467,-0.0539 0.0186,-0.1084 0.0155,-0.162267 z m -1.805587,1.836571 0.715718,1.017002 c -0.035,0.0406 -0.0657,0.0851 -0.0889,0.134884 l -0.468701,1.008202 0.008,0.004 c -0.278284,0.0725 -0.568535,0.11525 -0.869719,0.11525 -0.30095,0 -0.591601,-0.0423 -0.869702,-0.114733 l 0.008,-0.004 -0.468717,-1.008219 c -0.0233,-0.05 -0.0542,-0.0946 -0.0894,-0.135384 l 0.715201,-1.015969 c 0.0502,0.0189 0.103367,0.0305 0.159167,0.0305 h 1.087786 c 0.0563,0 0.110084,-0.01183 0.160717,-0.031 z"
+       sodipodi:nodetypes="ssssscccccccccccccccccccccccccccccccccccccccccccccccccccccccccscccccssc"
+       inkscape:export-filename="F:\vignesh\work\custom icons\asma chebbi - football\previews\shot - all icons.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>

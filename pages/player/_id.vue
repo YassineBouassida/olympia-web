@@ -16,8 +16,13 @@
             <h3 class="text_Primary txt_center">{{player.name_latin}}</h3>
           </div>
           <div class="flex align_center center py-2">
-            <Avatar class="mx-1" size="25" :url="player.club_logo" selected="true"></Avatar>
-            <Avatar class="mx-1" size="25" :url="player.nation_flag" selected="true"></Avatar>
+            <nuxt-link :to="localePath(`/team/${player.club_team_id}`)" tag="div" class="pointer">
+              <Avatar class="mx-1" size="25" :url="player.club_logo" selected="true"></Avatar>
+            </nuxt-link>
+
+            <nuxt-link :to="localePath(`/team/${player.nation_team_id}`)" tag="div" class="pointer">
+              <Avatar class="mx-1" size="25" :url="player.nation_flag" selected="true"></Avatar>
+            </nuxt-link>
           </div>
           <div class="inner_info flex">
             <div class="w-50 flex column align_center">
@@ -35,9 +40,25 @@
               </div>
             </div>
             <div class="w-50 flex column">
-              <div class="flex align_center column my-2">
-                <fa :icon="fas.faShoePrints"></fa>
+              <div v-if="player.foot=='R'" class="flex align_center column my-2">
+                <img
+                  width="16"
+                  height="16"
+                  src="@/static/img/icons/player_right_foot_highlight.svg"
+                  alt="player right foot highlight"
+                />
+
                 <h4 class="mt-1">Right Foot</h4>
+              </div>
+              <div v-if="player.foot=='L'" class="flex align_center column my-2">
+                <img
+                  width="16"
+                  height="16"
+                  src="@/static/img/icons/player_left_foot_highlight.svg"
+                  alt="player right foot highlight"
+                />
+
+                <h4 class="mt-1">Left Foot</h4>
               </div>
               <div class="flex align_center column my-2">
                 <fa :icon="fas.faWeightScale"></fa>
@@ -45,7 +66,16 @@
               </div>
               <div class="flex align_center column my-2">
                 <fa :icon="fas.faLocationDot"></fa>
-                <h4 class="mt-1">{{player[`nation_name_${$i18n.locale}`]}}</h4>
+                <h4 class="mt-1 flex column align_center">
+                  <span>{{player[`birth_city_name_latin`]}}</span>
+                  <nuxt-link
+                    :to="localePath(`/team/${player.nation_team_id}`)"
+                    tag="div"
+                    class="pointer"
+                  >
+                    <Avatar class="mx-1" size="25" :url="player.nation_flag" selected="true"></Avatar>
+                  </nuxt-link>
+                </h4>
               </div>
             </div>
           </div>
@@ -53,14 +83,19 @@
       </div>
     </section>
     <section class="my-3">
-      <headline :text="$t('nation.championship.game')"></headline>
+      <headline :text="$t('player.games')"></headline>
       <matchCard
         :fas="fas"
         class="card"
         v-for="(match) in player.games"
         :key="match.id"
         :match="match"
-      ></matchCard>
+      >
+        <nuxt-link :to="`/edition/${match.edition_id}`" tag="h5" class="pointer" slot="editionLink">
+          {{match[`edition_name_${$i18n.locale}`] }}
+          <fa :icon="fas.faArrowUpRightFromSquare" class="t-9" />
+        </nuxt-link>
+      </matchCard>
     </section>
   </div>
   <loading v-else></loading>
@@ -82,7 +117,8 @@ export default {
       this.openTab = tabName;
     },
     imageUrlAlt(event) {
-      event.target.src = "https://olympia.phoinix.ai/pictures/players/0.jpg";
+      event.target.src =
+        "https://olympia-api.phoinix.ai/pictures/players/0.jpg";
     }
   },
   computed: {

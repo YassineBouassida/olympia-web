@@ -52,17 +52,22 @@ import { menu } from "@/dummyData/menu";
 export default {
   data() {
     return {
-      menu: menu,
       openMenu: false
     };
   },
-
+  
   mounted() {
     console.log(this.$i18n.locale);
   },
   computed: {
     viewPort() {
       return this.$store.getters["style/viewPort"];
+    },
+    isLoading() {
+      return this.$store.getters["loading/isLoading"].menu;
+    },
+    menu() {
+      return this.$store.getters["global/menu"];
     }
   },
   watch: {
@@ -81,6 +86,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header {
+  .link,
+  .links_title {
+    font-variant: small-caps;
+  }
   height: 100px;
   background: map-get($map: $colors, $key: Primary);
   .container {

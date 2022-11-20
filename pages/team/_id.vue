@@ -1,36 +1,36 @@
 <template>
   <div class="container py-3" v-if="!isLoading">
     <section class="nation_info py-2">
-      <headline :text="$t('nation.info')"></headline>
+      <headline :text="$t(`${team.type}.info`)"></headline>
       <div class="info_panel flex wrap align_center space_between bg_Alpha pa-2 my-2">
-        <div class="flex align_center">
+        <div class="flex align_center info_line">
           <Avatar
-            class="mr-2"
-            url="http://olympia.phoinix.ai/pictures/nations/109.png"
+            class="mr-2 team_avatar"
+            url="http://olympia.phoinix.ai/pictures/nations/0.png"
             :selected="true"
             size="60"
           ></Avatar>
           <h1>{{team[`name_${$i18n.locale}`]}}</h1>
         </div>
-        <div class="flex align_center mx-3">
+        <div class="flex align_center mx-3 info_line">
           <fa :icon="fas.faLandmarkDome" class="t-14 pointer selectIcon" />
-          <h4 class="ml-1">{{team[`capital_city_${$i18n.locale}`]}}</h4>
+          <h4 class="ml-1">{{team[`stadium_${$i18n.locale}`]}}</h4>
         </div>
-        <div class="flex align_center mx-3">
+        <div class="flex align_center mx-3 info_line">
           <fa :icon="fas.faLocationPin" class="t-14 pointer selectIcon" />
-          <h4 class="ml-1">{{team[`confederation_${$i18n.locale}`]}}</h4>
+          <h4 class="ml-1">{{team[`city_${$i18n.locale}`]}}</h4>
         </div>
-        <div class="flex align_center mx-3">
+        <div class="flex align_center mx-3 info_line">
           <fa :icon="fas.faCakeCandles" class="t-14 pointer selectIcon" />
           <h4 class="ml-1">{{team[`foundation`]}}</h4>
         </div>
-        <div class="flex align_center mx-3">
+        <div class="flex align_center mx-3 info_line">
           <fa :icon="fas.faGlobe" class="t-14 pointer selectIcon" />
-          <h4 class="ml-1">{{team[`webste`]}}</h4>
+          <a :href="team[`webste`]" class="ml-1 text_Text" target="blank">{{team[`webste`]}}</a>
         </div>
       </div>
     </section>
-    <div class="tabToggle flex align_center bg_Primary pa-1 mt-4">
+    <!-- <div class="tabToggle flex align_center bg_Primary pa-1 mt-4">
       <div
         @click="changeTab('euroChampion')"
         class="tab pointer pa-2 text_White"
@@ -41,7 +41,7 @@
         class="tab pointer pa-2 text_White"
         :class="{active:openTab=='nationLeague'}"
       >{{$t('nation.nationLeague')}}</div>
-    </div>
+    </div>-->
     <section class="nation_info py-2 my-3">
       <headline :text="$t('nation.championship.squad')"></headline>
       <div class="flex wrap space_around squad pa-3 bg_Alpha">
@@ -50,7 +50,7 @@
           v-for="(player, index) in team.players"
           :key="index"
         >
-          <h3 class="player_num bg_White">1</h3>
+          <h3 class="player_num bg_White">{{player.number}}</h3>
           <Avatar selected="true" class="avatar" :url="player.picture" size="108"></Avatar>
           <div class="name_position bg_White px-4">
             <h5 class="my-1">{{player['name_latin']}}</h5>
@@ -59,25 +59,23 @@
         </div>
       </div>
     </section>
-    <section class="overview my-3">
-      <headline :text="$t('nation.championship.overview')"></headline>
-    </section>
+    
     <section class="games my-3">
-      <headline :text="$t('nation.championship.game')"></headline>
+      <headline :text="$t('nation.championship.games')"></headline>
       <matchCard
         :fas="fas"
         class="card"
         v-for="(match) in team.games"
         :key="match.id"
         :match="match"
-      ></matchCard>
+      >
+       <nuxt-link :to="`/edition/${match.edition_id}`" tag="h5" class="pointer" slot="editionLink">
+          {{match[`edition_name_${$i18n.locale}`] }}
+          <fa :icon="fas.faArrowUpRightFromSquare" class="t-9" />
+        </nuxt-link>
+      </matchCard>
     </section>
-    <section class="overview my-3">
-      <headline :text="$t('nation.championship.stats')"></headline>
-    </section>
-    <section class="overview my-3">
-      <headline :text="$t('nation.championship.participating')"></headline>
-    </section>
+   
   </div>
   <loading v-else></loading>
 </template>
@@ -145,5 +143,18 @@ section {
 }
 .avatar {
   position: relative;
+}
+.team_avatar {
+  border: none !important;
+}
+.info_panel {
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    .info_line {
+      width: 100%;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
 }
 </style>

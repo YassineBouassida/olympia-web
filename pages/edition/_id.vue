@@ -12,7 +12,7 @@
         <nuxt-link
           :to="localePath(`/edition/${id}${link.link}`)"
           tag="h4"
-          class="link pa-2 pointer text_Primary"
+          class="link pa-2 px-4 pointer text_Primary fill_height"
           v-for="(link, index) in submenu.items"
           :key="index"
         >{{ link[`name_${$i18n.locale}`] }}</nuxt-link>
@@ -67,7 +67,8 @@ export default {
 .tabs_nav {
   .nuxt-link-exact-active {
     height: 100%;
-    border-bottom: 3px solid map-get($map: $colors, $key: Primary);
+    background: map-get($map: $colors, $key: Primary);
+    color: map-get($map: $colors, $key: White) !important;
     &.tab_logo {
       background: map-get($map: $colors, $key: LightGrey);
       border-bottom: none !important;
@@ -79,9 +80,12 @@ export default {
   position: sticky;
   top: 0;
   border-bottom: 2px solid map-get($map: $colors, $key: Primary);
-  background: map-get($map: $colors, $key: White);
+  background: map-get($map: $colors, $key: LightGrey);
   z-index: 99;
-
+  .link {
+    line-height: 50px;
+    height: 100%;
+  }
   @media (max-width: 1024px) {
     overflow-x: scroll;
     &::-webkit-scrollbar {

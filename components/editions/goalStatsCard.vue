@@ -6,7 +6,7 @@
         <div class="flex align_center center mb-2">
           <h3 class="text_Primary">{{stats.goals}}</h3>
           <img
-            src="http://olympia.phoinix.ai/icos/G.png"
+            src="@/static/img/icons/football.svg"
             alt="ball"
             width="32"
             height="32"
@@ -20,7 +20,7 @@
         <img
           width="32"
           height="32"
-          src="http://olympia.phoinix.ai/icos/G_with_L.png"
+          src="@/static/img/icons/player_left_foot_highlight.svg"
           alt="G with L"
         />
         <h3 class="text_Primary mt-2">{{stats.left_goals}}</h3>
@@ -29,7 +29,7 @@
         <img
           width="32"
           height="32"
-          src="http://olympia.phoinix.ai/icos/G_with_R.png"
+          src="@/static/img/icons/player_right_foot_highlight.svg"
           alt="G with R"
         />
         <h3 class="text_Primary mt-2">{{stats.right_goals}}</h3>
@@ -38,7 +38,7 @@
         <img
           width="32"
           height="32"
-          src="http://olympia.phoinix.ai/icos/G_with_H.png"
+          src="@/static/img/icons/player_head_highlight.svg"
           alt="G with H"
         />
         <h3 class="text_Primary mt-2">{{stats.head_goals}}</h3>
@@ -47,7 +47,7 @@
         <img
           width="32"
           height="32"
-          src="http://olympia.phoinix.ai/icos/G_with_B.png"
+          src="@/static/img/icons/player_torso_highlight.svg"
           alt="G with B"
         />
         <h3 class="text_Primary mt-2">{{stats.other_part_goals}}</h3>
@@ -56,7 +56,7 @@
         <img
           width="32"
           height="32"
-          src="http://olympia.phoinix.ai/icos/OG.png"
+          src="@/static/img/icons/own_goal.svg"
           alt="OG"
         />
         <h3 class="text_Primary mt-2">{{stats.own_goals}}</h3>
@@ -69,4 +69,7 @@ export default {
   props:['stats']
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h4 {
+  color: map-get($map: $colors, $key: GreyText);
+}</style>

@@ -1,10 +1,15 @@
 <template>
   <div class="container">
-    <filterBox @filterChanged="filterChanged" :fas="fas" :initials="{ ...filters }"></filterBox>
+    <filterBox
+      @filterChanged="filterChanged"
+      :fas="fas"
+      :initials="{ ...initialFilters }"
+      @resetFilters="resetFilters"
+      v-if="initialFilters"
+    ></filterBox>
     <div v-if="!isLoading">
       <div class="my-3">
         <div class="my-3">
-          <headline class="mb-3" :text="$t('editions.groupStage.rank')"></headline>
           <dataTable
             :data="formattingHeading(standings.standings)"
             :items="formattingHeading(standings.standings).data"
@@ -33,35 +38,44 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 
 export default {
   async fetch() {
-    await this.fetchFiltredStandings();
+    //await this.fetchFiltredStandings();
+    let id = this.$route.params.id;
+    await this.$store.dispatch("edition/fetchDefaultStandings", id);
+    this.initialFilters = {
+      id: this.$route.params.id,
+      venue: this.defaultStandings.venue,
+      fromDate: this.defaultStandings.fromDate,
+      toDate: this.defaultStandings.toDate,
+      fromMatchDay: this.defaultStandings.fromMatchDay,
+      toMatchDay: this.defaultStandings.toMatchDay,
+      live: this.defaultStandings.live
+    };
+    this.filters = { ...this.initialFilters };
   },
   data() {
     return {
       selectedStageIndex: 0,
       live: false,
-      filters: {
-        id: this.$route.params.id,
-        venue: "N",
-        fromDate: "2021-08-13",
-        toDate: "2022-05-22",
-        fromMatchDay: 1,
-        toMatchDay: 3
-      }
+      filters: null,
+      initialFilters: null
     };
   },
   computed: {
     fas() {
       return fas; // NOT RECOMMENDED
     },
+    defaultStandings() {
+      return this.$store.getters["edition/defaultStandings"];
+    },
     isLoading() {
       return this.$store.getters["loading/isLoading"].standings;
     },
     standings() {
-      return this.$store.getters["edition/standings"];
+      let defaultStandings = this.$store.getters["edition/defaultStandings"];
+      let filtredStandings = this.$store.getters["edition/standings"];
+      return filtredStandings || defaultStandings;
     },
     allPages() {
-      console.log(this.standings);
-
       if (!this.standings) return null;
       return this.standings.pages.find(page => {
         return page.title == "ALL";
@@ -72,48 +86,31 @@ export default {
     formattingHeading(standings) {
       let data = [];
       let columns = [];
+      let Params = ["Rank", "Pts", "P", "W", "D", "L", "GF", "GA", "GD"];
       if (standings) {
-        Object.keys(standings[0]).map(param => {
-          const unusedParam = [
-            "Color",
-            "DP",
-            "Live",
-            "MaxRank",
-            "MinRank",
-            "PP",
-            "Pool",
-            "Pos",
-            "RC",
-            "SYC",
-            "YC",
-            "TeamName",
-            "TeamId",
-            "TeamIcon"
-          ];
-
+        Params.map(param => {
           let column = { title: "", name: "", sortField: "" };
-          if (unusedParam.indexOf(param) == -1) {
-            if (param == "Rank") {
-              column = {
-                title: "#",
-                name: param,
-                sortField: param,
-                type: "withColor"
-              };
-            } else {
-              column = {
-                title: param,
-                name: param,
-                sortField: param,
-                type: "regular"
-              };
-            }
-            columns.unshift(column);
+          if (param == "Rank") {
+            column = {
+              title: "#",
+              name: param,
+              sortField: param,
+              type: "withColor"
+            };
+          } else {
+            column = {
+              title: param,
+              name: param,
+              sortField: param,
+              type: "regular"
+            };
           }
+          columns.push(column);
         });
         let teamColumn = {
           title: "Team",
           name: "Team",
+          id: "",
           sortField: "Team.TeamName",
           type: "complex"
         };
@@ -128,17 +125,23 @@ export default {
           });
         });
       }
-      console.log({ headings: columns, data: data });
 
       return { headings: columns, data: data };
     },
     filterChanged({ param, value }) {
-      console.log("param ", param, " value ", value);
       this.filters[param] = value;
       this.fetchFiltredStandings();
     },
+    resetFilters() {
+      this.filters = { ...this.initialFilters };
+      this.fetchFiltredStandings();
+    },
     fetchFiltredStandings() {
-      this.$store.dispatch("edition/fetchStandings", this.filters);
+      let id = this.$route.params.id;
+      this.$store.dispatch("edition/fetchStandings", {
+        ...this.filters,
+        id: id
+      });
     }
   }
 };

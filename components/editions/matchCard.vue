@@ -9,16 +9,19 @@
       ></div>
     </div>
     <div class="match_details flex align_center space_between teams">
-      <div class="flex align_center team1 team space_between">
+      <nuxt-link
+        :to="localePath(`/team/${match.team1_id}`)"
+        class="pointer flex align_center team1 team space_between"
+      >
         <h4>{{ match.team1_name }}</h4>
         <img
-          :src="match.team1_icon||'http://olympia.phoinix.ai/pictures/nations/171.png'"
+          :src="match.team1_icon||'http://olympia.phoinix.ai/pictures/nations/0.png'"
           @error="imageUrlAlt"
           width="32"
           height="32"
           :alt="match.team1_name"
         />
-      </div>
+      </nuxt-link>
       <div class="results flex align_center">
         <div class="score1 flex align_center mx-1">
           <div
@@ -40,21 +43,24 @@
           </div>
         </div>
       </div>
-      <div class="flex align_center team2 team space_between">
+      <nuxt-link
+        :to="localePath(`/team/${match.team2_id}`)"
+        class="pointer flex align_center team2 team space_between"
+      >
         <img
-          :src="match.team2_icon||'http://olympia.phoinix.ai/pictures/nations/171.png'"
+          :src="match.team2_icon||'http://olympia.phoinix.ai/pictures/nations/0.png'"
           @error="imageUrlAlt"
           width="32"
           height="32"
           :alt="match.team2_name"
         />
         <h4>{{ match.team2_name }}</h4>
-      </div>
+      </nuxt-link>
     </div>
     <h3
       class="text_primary my-2"
     >{{match.timeline&&match.timeline[match.timeline.length-1][`title_${$i18n.locale}`]}}</h3>
-    <div class="hr bg_Primary"></div>
+    <div class="hr" :style="{backgroundColor:match.status_color}"></div>
     <div class="flex align_center space_between match_static_details">
       <!-- Date of the match -->
       <div class="flex column align_center my-1 mx-2">
@@ -70,19 +76,17 @@
       </div>
       <!-- Stadium of the match -->
       <div class="flex column align_center my-1 mx-2">
-        <img src="https://olympia.phoinix.ai/icos/stadium.png" alt="stdium" width="20" height="20" />
+        <img src="@/static/img/icons/stadium.svg" alt="stdium" width="20" height="20" />
         <h4 class="my-1">{{match.stadium}}</h4>
       </div>
       <!-- Attendance of the match -->
       <div class="flex column align_center my-1 mx-2">
-        <img
-          src="https://olympia.phoinix.ai/icos/attendance.png"
-          alt="stdium"
-          width="20"
-          height="20"
-        />
+        <img src="@/static/img/icons/attendance_spectators.svg" alt="stdium" width="20" height="20" />
         <h4 class="my-1">{{match.attendance}}</h4>
       </div>
+    </div>
+    <div>
+      <slot name="editionLink"></slot>
     </div>
   </div>
 </template>
@@ -92,9 +96,10 @@ export default {
 
   methods: {
     imageUrlAlt(event) {
-      event.target.src = "http://olympia.phoinix.ai/pictures/nations/48.png";
+      event.target.src = "https://olympia-api.phoinix.ai/pictures/clubs/0.png";
     },
     dateFormatting(date) {
+      if (!date) return;
       //  Convert   DD-MM-YYYY to MM-DD-YYYY
       var dateParts = date.split("-");
 
@@ -103,6 +108,7 @@ export default {
       return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
     },
     timeFormatting(date) {
+      if (!date) return;
       //  Convert   DD-MM-YYYY to MM-DD-YYYY
       var dateParts = date.split("-");
 
@@ -115,6 +121,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+h4 {
+  font-variant: small-caps;
+}
 .match_parts {
   flex-direction: row-reverse;
   .part {
@@ -158,14 +167,14 @@ export default {
   }
   @media (max-width: 375px) {
     .match_static_details {
-    width: 260px;
-  }
-  .match_details {
-    width: 260px;
-  }
+      width: 260px;
+    }
+    .match_details {
+      width: 260px;
+    }
     .team {
       flex-direction: column;
-      &.team1{
+      &.team1 {
         flex-direction: column-reverse;
       }
     }

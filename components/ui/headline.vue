@@ -19,6 +19,7 @@ export default {
     color: map-get($map: $colors, $key: Primary);
     bottom: -2px;
     border-bottom: 2px solid map-get($map: $colors, $key: Primary);
+    font-variant: small-caps;
   }
 }
 </style>

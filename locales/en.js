@@ -9,6 +9,7 @@ export default {
   },
   editions: {
     keyStats: "Key Stats",
+    rewards: "Olympia Rewards",
     stats: {
       players: "Players",
       goals: "Goals",
@@ -26,34 +27,42 @@ export default {
       endingGameDay: "Ending Game Day",
       reset: "Reset Filters",
       live: "Live Standing",
-      home:'Home',
-      away:'Away',
-      overAll:'Overall',
-      group:'Group',
-      rank:'Rank Of 3rd Place',
+      home: "Home",
+      away: "Away",
+      overAll: "Overall",
+      neutral: "Neutral",
+      group: "Group",
+      rank: "Rank Of 3rd Place",
     },
-    teams:{
-      rankings:'Rankings'
-
-    }
+    teams: {
+      rankings: "Rankings",
+    },
   },
-  nation:{
-    info:"Nation Info",
-    euroChampion:"EUROPEAN CHAMPIONSHIP",
-    nationLeague:"NATIONS LEAGUE",
-    nation:{
-      squad:"NATIONS LEAGUE-SQUAD",
-      overview:"NATIONS LEAGUE-OVRVIEW",
-      game:"NATIONS LEAGUE-GAMES",
-      stats:"NATIONS LEAGUE-STATS",
-      participating:"NATIONS LEAGUE-PARTICIPATING PLAYERS"
+  player: {
+    games: "Games",
+  },
+  nation: {
+    info: "Nation Info",
+    euroChampion: "EUROPEAN CHAMPIONSHIP",
+    nationLeague: "NATIONS LEAGUE",
+    nation: {
+      squad: "NATIONS LEAGUE-SQUAD",
+      overview: "NATIONS LEAGUE-OVRVIEW",
+      game: "NATIONS LEAGUE-GAMES",
+      stats: "NATIONS LEAGUE-STATS",
+      participating: "NATIONS LEAGUE-PARTICIPATING PLAYERS",
     },
-    championship:{
-      squad:"EUROPEAN CHAMPIONSHIP-SQUAD",
-      overview:"EUROPEAN CHAMPIONSHIP-OVRVIEW",
-      game:"EUROPEAN CHAMPIONSHIP-GAMES",
-      stats:"EUROPEAN CHAMPIONSHIP-STATS",
-      participating:"EUROPEAN CHAMPIONSHIP-PARTICIPATING PLAYERS"
+
+    championship: {
+      squad: "SQUAD",
+      games:'Games',
+      overview: "EUROPEAN CHAMPIONSHIP-OVRVIEW",
+      game: "EUROPEAN CHAMPIONSHIP-GAMES",
+      stats: "EUROPEAN CHAMPIONSHIP-STATS",
+      participating: "EUROPEAN CHAMPIONSHIP-PARTICIPATING PLAYERS",
     },
-  }
+  },
+  club: {
+    info: "Club Info",
+  },
 };

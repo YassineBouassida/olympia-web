@@ -1,5 +1,5 @@
 <template>
-  <div class="stats bg_White ">
+  <div class="stats bg_White">
     <div class="flex align_center space_between pa-2">
       <avatar
         v-for="(element, index) in stats"
@@ -7,7 +7,7 @@
         :url="element.player_picture"
         size="80"
         :selected="selectedStatIndex == index"
-        class="pointer"
+        class="pointer avatar"
         @click.native="selectedStatIndex = index"
       ></avatar>
     </div>
@@ -28,22 +28,20 @@
           </div>
         </div>
         <div class="standing">
-          <div
-            class="flex align_center space_around ranking py-1"
-            v-for="(ranking, index) in selectedStat.standings"
+          <nuxt-link
+            tag="div"
+            :to="localePath(`/player/${ranking.player_id}`)"
+            class="flex pointer align_center space_around ranking py-1"
+            v-for="(ranking, index) in selectedStat.ranking"
             :key="index"
           >
             <div class="rank mr-4">{{ ranking.rank }}</div>
             <div class="name_flag flex align_center flex2">
-              <img
-                class="flag"
-                :src="ranking.picture"
-                :alt="ranking.name_latin"
-              />
-              {{ ranking.name_latin }}
+              <img class="flag" :src="ranking.player_picture" :alt="ranking.player_name_latin" />
+              {{ ranking.player_name_latin }}
             </div>
-            <strong>9</strong>
-          </div>
+            <strong>{{ranking.value}}</strong>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -54,19 +52,32 @@ export default {
   props: ["stats"],
   data() {
     return {
-      selectedStatIndex: 0,
+      selectedStatIndex: 0
     };
   },
   computed: {
     selectedStat() {
       return this.stats && this.stats[this.selectedStatIndex];
-    },
+    }
   },
+  mounted() {
+    setInterval(() => {
+      if (this.selectedStatIndex == this.stats.length - 1) {
+        this.selectedStatIndex = 0;
+      } else {
+        this.selectedStatIndex++;
+      }
+    }, 15 * 1000);
+  }
 };
 </script>
 <style lang="scss" scoped>
+.avatar {
+  background-size: 80% !important;
+}
 .stat_details {
   border-top: 1px solid map-get($map: $colors, $key: BorderLine);
+
   .element_large_picture {
     height: 120px;
   }

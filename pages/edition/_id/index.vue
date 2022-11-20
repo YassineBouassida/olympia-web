@@ -15,15 +15,15 @@
     <section class="olympia_rewards py-4">
       <headline :text="$t('editions.keyStats')"></headline>
       <div class="flex space_between mt-2 stats_list">
-        <playersStatsCard class="w-30 stat" :stats="stats"></playersStatsCard>
-        <cardsStatsCard class="w-30 stat" :stats="stats"></cardsStatsCard>
-        <goalStatsCard class="w-30 stat" :stats="stats"></goalStatsCard>
+        <playersStatsCard class="stat" :stats="stats"></playersStatsCard>
+        <goalStatsCard class="stat" :stats="stats"></goalStatsCard>
+        <cardsStatsCard class="stat" :stats="stats"></cardsStatsCard>
       </div>
     </section>
     <!-- Olympia Rewards Top 5 Leagues -->
 
     <section class="olympia_rewards py-4">
-      <headline :text="$t('home.top5')"></headline>
+      <headline :text="$t('editions.rewards')"></headline>
       <div class="flex mt-3 wrap rewards">
         <div class="top_players">
           <mostValuable
@@ -88,6 +88,7 @@ export default {
 .stats_list {
   flex-wrap: wrap;
   .stat {
+    width: 32% !important;
     @media (max-width: 1200px) {
       width: 49% !important;
       margin-bottom: 1rem;
@@ -95,6 +96,7 @@ export default {
     @media (max-width: 1024px) {
       width: 100% !important;
       margin-bottom: 1rem;
+      height: 200px;
     }
     @media (max-width: 480px) {
       &:deep .avatar {

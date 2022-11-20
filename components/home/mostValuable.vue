@@ -2,12 +2,12 @@
   <div class="most_valuable mb-2 bg_White pa-2">
     <subtitle>{{title}}</subtitle>
     <div class="flex mt-2 align_center">
-      <div class="profile">
+      <div class="profile flex column align_center flex2">
         <nuxt-link :to="localePath(`/player/${stats.id}`)" :title="stats.team_club_name_latin">
           <avatar :url="stats.picture" size="120"></avatar>
         </nuxt-link>
         <h3 class="text_Primary my-2 w-100 txt_center">{{stats.name_latin}}</h3>
-        <div class="flex align_center center flags my-2">
+        <div class="flex align_center center flags my-2 w-100">
           <nuxt-link
             :to="localePath(`/team/${stats.team_club_id}`)"
             :title="stats.team_club_name_latin"
@@ -22,10 +22,18 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="statistics flex2">
+      <div class="statistics">
         <div class="flex align_center end w-100 my-2">
           <h4>OLYMPIA RATING</h4>
           <div class="rank bg_Primary ml-2">{{ stats.rating }}</div>
+        </div>
+        <div class="flex align_center end w-100 my-2">
+          <h4>MOTM Awards</h4>
+          <div class="rank text_Primary ml-2">{{stats.motm_awards}}</div>
+        </div>
+        <div class="flex align_center end w-100 my-2">
+          <h4>Played Games</h4>
+          <div class="rank text_Primary ml-2">{{stats.games_played}}</div>
         </div>
         <div
           class="flex align_center end w-100 my-2"

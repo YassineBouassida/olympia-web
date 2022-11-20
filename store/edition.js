@@ -12,7 +12,9 @@ export const state = () => ({
   teams: null,
   players: null,
   groupstage: null,
+  defaultgGoupStage: null,
   standings: null,
+  defaultStandings: null,
   knockoutstage: null,
   mostValuableYoungPlayer: mostValuablePlayer,
   mostValuablePlayer: mostValuablePlayer,
@@ -43,6 +45,12 @@ export const getters = {
   },
   groupstage(state) {
     return state.groupstage;
+  },
+  defaultGroupStage(state) {
+    return state.defaultgGoupStage;
+  },
+  defaultStandings(state) {
+    return state.defaultStandings;
   },
   knockoutstage(state) {
     return state.knockoutstage;
@@ -144,6 +152,24 @@ export const actions = {
 
     dispatch("loading/chnageLoadingState", { players: false }, { root: true });
   },
+  async fetchDefaultGroupStage({ commit, dispatch }, payload) {
+    dispatch(
+      "loading/chnageLoadingState",
+      { groupStage: true },
+      { root: true }
+    );
+
+    const groupStage = await this.$axios.$get(
+      `/api/edition/${payload}/groupstage`
+    );
+    commit("setDefaultGroupStage", groupStage);
+
+    dispatch(
+      "loading/chnageLoadingState",
+      { groupStage: false },
+      { root: true }
+    );
+  },
   async fetchGroupStage(
     { commit, dispatch },
     {
@@ -153,6 +179,7 @@ export const actions = {
       toDate = "2021-07-14",
       fromMatchDay = 1,
       toMatchDay = 3,
+      live = false,
     }
   ) {
     dispatch(
@@ -162,12 +189,28 @@ export const actions = {
     );
 
     const groupStage = await this.$axios.$get(
-      `/api/edition/${id}/groupstage/${venue}/${fromDate}/${toDate}/${fromMatchDay}/${toMatchDay}/live`
+      `/api/edition/${id}/groupstage/${venue}/${fromDate}/${toDate}/${fromMatchDay}/${toMatchDay}/live=${
+        live ? 1 : 0
+      }`
     );
     commit("setGroupStage", groupStage);
     dispatch(
       "loading/chnageLoadingState",
       { groupStage: false },
+      { root: true }
+    );
+  },
+  async fetchDefaultStandings({ commit, dispatch }, payload) {
+    dispatch("loading/chnageLoadingState", { standings: true }, { root: true });
+
+    const standings = await this.$axios.$get(
+      `/api/edition/${payload}/standings`
+    );
+    commit("setDefaultStandings", standings);
+
+    dispatch(
+      "loading/chnageLoadingState",
+      { standings: false },
       { root: true }
     );
   },
@@ -180,6 +223,7 @@ export const actions = {
       toDate = "2021-07-14",
       fromMatchDay = 1,
       toMatchDay = 3,
+      live = false,
     }
   ) {
     dispatch("loading/chnageLoadingState", { standings: true }, { root: true });
@@ -232,6 +276,12 @@ export const mutations = {
   },
   setGroupStage(state, payload) {
     state.groupstage = payload;
+  },
+  setDefaultGroupStage(state, payload) {
+    state.defaultgGoupStage = payload;
+  },
+  setDefaultStandings(state, payload) {
+    state.defaultStandings = payload;
   },
   setStandings(state, payload) {
     state.standings = payload;

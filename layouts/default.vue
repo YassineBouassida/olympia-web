@@ -1,8 +1,10 @@
 <template>
-  <div class="flex column app" :class="{ rtl: rtl, ltr: !rtl }">
-    <Header class="header" :class="{sticky:sticky}"></Header>
+  <div class="flex column app" :class="{ rtl: rtl, ltr: !rtl }" v-if="!isLoading">
+    <Header class="header" :class="{ sticky: sticky }"></Header>
     <nuxt class="main" />
+    <Footer></Footer>
   </div>
+  <loading v-else></loading>
 </template>
 <style lang="scss">
 @import "~/static/scss/global.scss";
@@ -40,6 +42,9 @@ export default {
       ]
     };
   },
+  async fetch() {
+    await this.$store.dispatch("global/fetchMenu");
+  },
   data() {
     return {
       lastScrollY: 0,
@@ -74,7 +79,7 @@ export default {
       return this.$i18n.localeProperties.dir == "rtl";
     },
     isLoading() {
-      return this.$store.getters["loading/isLoading"];
+      return this.$store.getters["loading/isLoading"].menu;
     }
   }
 };
